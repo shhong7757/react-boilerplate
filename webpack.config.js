@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const { ESBuildMinifyPlugin } = require("esbuild-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: ["react-hot-loader/patch", "./src/index.tsx"],
@@ -51,7 +52,13 @@ module.exports = {
     publicPath: "http://localhost:3000/dist/",
     hotOnly: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      title: "React App",
+      template: "public/index.html",
+    }),
+  ],
   optimization: {
     minimizer: [
       new ESBuildMinifyPlugin({
