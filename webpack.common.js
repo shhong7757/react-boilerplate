@@ -31,6 +31,20 @@ module.exports = {
         type: 'javascript/auto',
         use: ['@svgr/webpack', 'url-loader'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: 'javascript/auto',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              fallback: 'file-loader',
+              name: 'fonts/[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {

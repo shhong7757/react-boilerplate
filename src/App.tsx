@@ -9,6 +9,7 @@ function App() {
   return (
     <div className="App">
       <SVGIcon icon="hi" width={40} height={40} />
+      <p>Hello, world!</p>
     </div>
   );
 }
