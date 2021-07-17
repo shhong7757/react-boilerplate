@@ -3,22 +3,37 @@
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
   mode: 'production',
-  output: {
-    path: path.resolve(__dirname, 'dist/'),
-    publicPath: '/dist/',
-    filename: 'bundle.js',
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'React App',
       template: 'public/index.html',
     }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
+  output: {
+    path: path.resolve(__dirname, 'dist/'),
+    publicPath: './',
+    filename: 'bundle.js',
+  },
   optimization: {
     minimizer: [
       new ESBuildMinifyPlugin({

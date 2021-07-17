@@ -23,37 +23,21 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
         test: /\.svg$/,
         type: 'javascript/auto',
         use: ['@svgr/webpack', 'url-loader'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        type: 'javascript/auto',
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              fallback: 'file-loader',
-              name: 'fonts/[name].[ext]',
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/font/[hash][ext][query]',
+        },
       },
     ],
   },
   resolve: {
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist/'),
-    publicPath: '/dist/',
-    filename: 'bundle.js',
   },
 };
