@@ -1,3 +1,3 @@
-import SVGIcon from "./SVGIcon";
+import SVGIcon from './SVGIcon';
 
 export default SVGIcon;

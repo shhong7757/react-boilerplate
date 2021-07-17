@@ -1,5 +1,5 @@
-import React from "react";
-import * as svg from "assets/svg";
+import React from 'react';
+import * as svg from 'assets/svg';
 
 export type SVGIconType = keyof typeof svg;
 
@@ -10,7 +10,7 @@ export type SVGIconProps = {
 function SVGIcon({
   icon,
   ...props
-}: SVGIconProps & React.SVGProps<SVGSVGElement>) {
+}: SVGIconProps & React.SVGProps<SVGSVGElement>): JSX.Element {
   const SVG = svg[icon];
 
   return <SVG {...props} />;
